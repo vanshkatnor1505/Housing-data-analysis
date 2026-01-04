@@ -1,0 +1,117 @@
+FLLOWING ARE STEPS I FOLLOWED DURING SELECTING A CORRECT MODEL
+
+
+I tried linear regression for training model first and got 
+following Results : 
+
+>> R2 score :  0.6722047299637572
+>> MAE: 0.19990272792834862
+>> RMSE: 0.2515821402917184
+
+which indicates model is may be underfitting due to one of following
+reasons :
+1. multicollinearity which results as Some expensive houses 
+    are not being predicted well
+    
+
+NEXT I BUILT Ridge Regression model which concludes : 
+1. multicollinearity was in very small amount and hqad very small impact
+    on model's performance.
+
+I TESTED DIFFERENT VALUES OF ALPHA FOR RIDGE REGRESSION MODEL :
+
+1. For alpha 1.0
+    >> R2 score :  0.6721132565243836
+    >> MAE: 0.19988090363326644
+    >> RMSE: 0.2516172406737199
+
+2. for alpha 0.01 (best because highest r2 and lowest RMSE)
+    >> R2 score :  0.6722038273393363
+    >> MAE: 0.1999025071795736  
+    >> RMSE: 0.25158248667259714
+
+3. for alpha  0.1
+    >> R2 score :  0.6721956926511283
+    >> MAE: 0.19990052273005335
+    >> RMSE: 0.25158560832648086
+
+4. for alpha 10
+    >> R2 score :  0.6711861366378131
+    >> MAE: 0.1997060587284183
+    >> RMSE: 0.2519727211590996
+
+5. for alpha 100
+    >> R2 score :  0.6555621554539578
+    >> MAE: 0.20118399029565917      
+    >> MSE: 0.25788964100293693
+
+professionaly we can say
+“Ridge Regression was applied to mitigate multicollinearity. 
+Hyperparameter tuning revealed that a small regularization 
+trength (α = 0.01) yielded the best performance. However, 
+Ridge did not significantly outperform Linear Regression, 
+indicating that the baseline model was already well-conditioned.”
+
+
+NEXT I TESTED LASSO REGRESSION MODEL
+    >> R2 score :  0.6526276742047423
+    >> MAE: 0.20406674821157073
+    >> RMSE: 0.25898587259250555
+
+IT GIVES FOLLOWING INSIGHTES :
+
+Selected Features (Non-zero coefficients):
+> furnishingstatus_unfurnished   -0.046619
+> bedrooms                        0.012553
+> guestroom                       0.016895
+> hotwaterheating                 0.018176
+> parking                         0.027548
+> mainroad                        0.034305
+> basement                        0.041152
+> prefarea                        0.047637
+> stories                         0.064652
+> airconditioning                 0.068633
+> bathrooms                       0.086472
+> area                            0.103322
+
+THIS MEANS
+These are the most important predictors, ranked by influence:
+
+🔥 Strongest Positive Drivers of Price
+
+> Area (+0.103) — biggest impact 
+
+> Bathrooms (+0.086)
+
+> Air Conditioning (+0.069)
+
+> Stories (+0.065)
+
+> Preferred Area (+0.048)
+
+> Basement (+0.041)
+
+> Main Road Access (+0.034)
+
+> Parking (+0.028)
+
+NEGATIVE IMPACT
+
+>> Unfurnished houses → price decreases
+
+
+THEN I tested Random forest regression which failed badly
+
+Random Forest Results
+    >> R2 Score : 0.6160296774657054
+    >> MAE      : 1012054.8571355761
+    >> RMSE     : 1393127.7643371394
+
+It can be due to small size of data set. 
+
+CONCLUSION : 
+“Multiple models were evaluated including Linear Regression, 
+Ridge, Lasso, and Random Forest.Ridge Regression achieved the
+best generalization (R² ≈ 0.67). Tree-based models underperformed 
+due to limited data size and predominantly linear feature–target 
+relationships.”
